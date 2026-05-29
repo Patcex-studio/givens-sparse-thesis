@@ -43,9 +43,16 @@ git clone https://github.com/Patcex-studio/givens-sparse-thesis.git
 cd givens-sparse-thesis
 python verify_givens.py   # runs the verification script
 ```
+
+---
+
+<img width="1672" height="941" alt="l;rk3-2ec" src="https://github.com/user-attachments/assets/fcf74496-be29-4919-8cb3-98918dc3fb03" />
+
 ---
 
 
 **License:** BSD 3-Clause  
 **Author:** Jocer Speis 
 **Status:** Theoretical development complete. Experimental validation in separate repository.
+
+
