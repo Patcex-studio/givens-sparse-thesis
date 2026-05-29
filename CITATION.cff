@@ -1,16 +1,14 @@
 cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
 title: "Givens Sparse Thesis: Exact Linear-Time Simulation of Givens-Rotation Quantum Circuits"
-message: "They said quantum states live in 2ⁿ dimensions. Simulation impossible beyond 50 qubits.
-
-We noticed: "Givens rotations touch exactly two basis states. Support grows linearly. |supp(ψ_k)| ≤ 1 + k. O(M) time. Exact. No approximation. Patching reality.
-type: research-article
+type: article
 authors:
   - family-names: "Speis"
     given-names: "Jocer"
     affiliation: "Patcex Studio"
 repository-code: "https://github.com/Patcex-studio/givens-sparse-thesis"
 url: "https://github.com/Patcex-studio/givens-sparse-thesis"
-license: BSD-3-Clause
+license: "BSD-3-Clause"
 version: 1.0.0
 date-released: 2026-05-29
 keywords:
