@@ -6,23 +6,6 @@ authors:
   - family-names: "Speis"
     given-names: "Jocer"
     affiliation: "Patcex Studio"
-repository-code: "https://github.com/Patcex-studio/givens-sparse-thesis"
 url: "https://github.com/Patcex-studio/givens-sparse-thesis"
-license: "BSD-3-Clause"
-version: 1.0.0
-date-released: 2026-05-29
-keywords:
-  - quantum-computing
-  - givens-rotations
-  - classical-simulation
-  - linear-time
-  - exact-simulation
-  - sparse-state
-  - quantum-circuits
-  - unitary-decomposition
-  - quantum-machine-learning
-  - variational-quantum-algorithms
-  - backpropagation
-  - deterministic-simulation
-  - exponential-barrier
-  - patcex-lab
+year: 2026
+journal: "Patcex Lab"
