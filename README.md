@@ -1,5 +1,11 @@
 # Givens Sparse Thesis
 
+[![License: BSD 3-Clause](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](LICENSE)
+[![arXiv](https://img.shields.io/badge/arXiv-coming_soon-red.svg)](https://arxiv.org)
+[![GitHub release](https://img.shields.io/github/v/release/Patcex-studio/givens-sparse-thesis)](https://github.com/Patcex-studio/givens-sparse-thesis/releases)
+[![DOI](https://img.shields.io/badge/DOI-coming_soon-blue)](https://zenodo.org)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+
 **Claim:**  
 Any quantum circuit built from complex Givens rotations admits exact classical simulation in `O(M)` time and memory, where `M` is the number of rotations.
 
@@ -19,6 +25,26 @@ Each rotation touches exactly two basis states. Start with one non‑zero amplit
 - [Synthesis](./synthesis/article.md) — formatted as a short paper
 
 ---
+## Commercial use
+
+This software is released under the BSD 3-Clause license, which **permits commercial use**.
+
+Pharmaceutical, biotech, and material science companies are welcome to:
+- Integrate this method into their internal simulation pipelines
+- Build proprietary products based on this method
+- Contact patcex@proton.me for enterprise support, training, or custom development
+
+---
+
+## Quick start
+
+```bash
+git clone https://github.com/Patcex-studio/givens-sparse-thesis.git
+cd givens-sparse-thesis
+python verify_givens.py   # runs the verification script
+```
+---
+
 
 **License:** BSD 3-Clause  
 **Author:** Jocer Speis 
