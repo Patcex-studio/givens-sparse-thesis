@@ -1,0 +1,6 @@
+H2 UCCSD: n_qubits=4, M=1, final |supp|=2, time=7.524910 sec, energy=-1.137270174625 (совпадает? да)
+Hartree-Fock index: [12]
+Ansatz nonzero indices: [ 3 12]
+Single Givens rotation: i=12, j=3, theta=0.113068139618, phi=3.141592653590
+Givens final support: 2
+FCI energy: -1.137270174625328
