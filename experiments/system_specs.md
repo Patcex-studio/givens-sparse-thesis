@@ -51,8 +51,16 @@
 
 When testing Givens-rotation algorithms:
 - Execution time scales linearly with number of operations
-- For 1000 random rotations on 148 qubits: ~0.04 seconds
-- Memory usage: ~20 MB RSS
+- For 20,000 random rotations on 1,000,000 qubits: ~16 seconds
+- Memory usage: ~21 MB RSS (independent of qubit count!)
+- **Scaling: O(√n) for random 1e/2e rotations**
+
+### Benchmarks:
+| Qubits | Rotations | Time | Memory |
+|--------|-----------|------|--------|
+| 148 | 1,000 | 0.04s | 20 MB |
+| 100,000 | 20,000 | 2.2s | 21 MB |
+| **1,000,000** | **20,000** | **16.4s** | **21 MB** |
 
 ## File Creation Date
 2026-05-30

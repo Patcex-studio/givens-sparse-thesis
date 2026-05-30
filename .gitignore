@@ -14,7 +14,7 @@
 # System files
 .DS_Store
 Thumbs.db
-
+experiments/idea
 # Build outputs
 build/
 dist/
