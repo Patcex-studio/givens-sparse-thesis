@@ -20,6 +20,7 @@ Each rotation touches exactly two basis states. Start with one non‑zero amplit
 
 - [Manifesto](./manifesto.md) — why this matters and why everyone missed it
 - [Research notes](./research/01_sparse_support_theorem/theorem.md) — the support bound theorem
+- [Birth Tree Theorem](./research/08_birth_tree_theorem/theorem.md) — causality and support reconstruction
 - [Algorithm](./research/02_linear_time_algorithm/algorithm.md) — linear‑time forward/backward simulation
 - [Limits](./research/04_hardness_and_limits/limits.md) — where the method breaks
 - [Synthesis](./synthesis/article.md) — formatted as a short paper
@@ -58,6 +59,18 @@ Example:
 ```bash
 python experiments/run_random_uccsd_like.py --n-qubits 148 --m 1000
 ```
+
+## Tree of births
+The simulator can also record a directed birth tree of newly created amplitudes and recover the zero structure of the quantum state from the rotation parameters. This allows the analysis of support growth and the causal origin of each non-zero basis amplitude.
+
+### Demonstration commands
+```bash
+# use the project virtual environment
+.\venv\Scripts\python.exe rcs_givens.py --mode=givens --n-qubits 3 --n-rotations 5 --track-births
+.\venv\Scripts\python.exe rcs_givens.py --mode=decompose --n-qubits 3 --depth 1 --track-births
+```
+
+> Note: empirical decompose tests with `n=10`, `depth=4` already produce `final_support = 1024`, so random RCS decomposition does not preserve a small support footprint.
 
 ---
 

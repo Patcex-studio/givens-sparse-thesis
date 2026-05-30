@@ -8,6 +8,12 @@ Tensor networks (e.g., MPS, PEPS) compress the quantum state by exploiting low e
 
 Quantum supremacy experiments (e.g., Google Sycamore) use random circuits with arbitrary two-qubit gates. These gates are **not** Givens rotations. Decomposing a generic two-qubit gate into Givens rotations requires `O(n²)` rotations, and the support bound becomes `O(n²)`, not linear. Moreover, the decomposition itself is exponential in circuit depth for random circuits. Our result applies only to circuits composed **solely** of Givens rotations.
 
+## Why does `decompose` on `n=10`, `depth=4` still reach full support?
+
+This is exactly the point. In the current implementation, a Sycamore-like decomposition on `n=10` with `depth=4` produces `final_support = 1024`. That means the circuit has already explored the full $2^{10}$ basis within the decomposed Givens representation, so the sparse support argument does not provide any compression in this regime.
+
+The reason is that the original support bound holds for a sequence of local Givens rotations taken as the actual circuit. A generic two-qubit gate decomposed into global Givens rotations is a different problem: each global rotation can affect only one block among $2^{n-2}$ blocks, and a generic block-diagonal gate requires exponentially many such rotations.
+
 ## Can I use this to simulate Shor's algorithm?
 
 No. Shor's algorithm uses a variety of gates including Hadamards, CNOTs, and controlled-phase gates. While each can be decomposed into Givens rotations, the number of rotations required is exponential in the number of qubits. The support bound then becomes exponential, and the linear-time advantage is lost.

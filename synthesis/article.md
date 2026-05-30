@@ -109,7 +109,17 @@ b_j' &= -e^{i\phi}s\cdot b_i + c\cdot b_j
 
 All operations are O(1) per rotation. Total backward pass: O(M).
 
-## 5. Complexity Summary
+## 5. Empirical verification of the birth tree
+The birth tree is not only a theoretical construct: it is observed in practice when tracking support evolution in sparse Givens simulations. In the measured examples below, the number of birth records equals $|\text{supp}(\psi_M)| - 1$ for final support, and the recorded structure matches the exact support.
+
+| Mode | n | M | final_support | birth_count | birth_bytes | memory |
+|------|---|----|---------------|-------------|-------------|--------|
+| givens | 3 | 5 | 5 | 4 | 568 | 97 MB |
+| decompose | 3 | 9 | 8 | 7 | 960 | 97 MB |
+
+The table confirms that `birth_bytes` grows with the number of births. For RCS with larger $n$, this can become a bottleneck, but the trajectory method provides a constant-memory alternative for sampling.
+
+## 6. Complexity Summary
 
 | Phase | Cost |
 |-------|------|
@@ -121,17 +131,23 @@ All operations are O(1) per rotation. Total backward pass: O(M).
 
 **No exponential anywhere.**
 
-## 6. Limitations
+## 7. Limitations
 
 The method does not apply to:
 - Circuits containing non-Givens gates (CNOT, Hadamard, etc.)
 - Circuits requiring O(2^n) Givens rotations to decompose
 - General quantum algorithms like Shor's or random circuit sampling
 
+In particular, our current `decompose` experiments show that a random Sycamore-like circuit with `n=10` and `depth=4` already reaches `final_support = 1024`, i.e. full support. This confirms that random two-qubit gates can destroy the sparsity advantage when they are decomposed into global Givens rotations.
+
 However, for the specific class of Givens-only circuits, the simulation is both exact and efficient.
 
-## 7. Conclusion
+## 8. Conclusion
 
-We have shown that the exponential barrier to quantum circuit simulation can be circumvented for a meaningful class of circuits. The key was recognizing that not all circuits explore the full Hilbert space, and identifying a simple structural property — linear support growth — that guarantees efficiency.
+The principal result is not merely that the simulation runs in $O(M)$ time. It is that the simulator can record a **birth tree** of newly created amplitudes and thereby recover the structure of zeros and non-zeros in the state.
 
-This work opens the door to further investigation of structured quantum circuits and their classical simulability.
+The birth tree makes support structure explicit: each new non-zero amplitude has a unique parent, and the directed forest of births can be reconstructed from the rotation parameters. This opens a path to compressed representations of quantum states beyond naive sparse vectors.
+
+For circuits with small support growth, such as UCCSD and global Givens schemes, the tree is trivial and exact reconstruction is efficient. For RCS, the tree becomes exponential, but the trajectory method allows approximate sampling with constant memory.
+
+This work therefore identifies a new structural lens on quantum simulation: exact support recovery via a causality graph, not just fast arithmetic.

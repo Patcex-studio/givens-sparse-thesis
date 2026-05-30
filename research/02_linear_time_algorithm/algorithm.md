@@ -18,6 +18,52 @@ for each rotation (i, j, θ, φ):
 ```
 Each step: `O(1)` dictionary operations. Total `O(M)`.
 
+## 3.3 Birth tracking algorithm
+The simulator can also record the **birth tree** of newly created non-zero amplitudes. A birth record is a tuple `(step, parent, child, i, j, theta, phi)`.
+
+```python
+births = []  # list of tuples (step, parent, child, i, j, theta, phi)
+
+def apply_rotation_pair_with_tracking(state, i, j, theta, phi, step, births):
+    old_i = state.get(i, 0j)
+    old_j = state.get(j, 0j)
+    c = cos(theta)
+    s = sin(theta)
+    e = exp(-1j * phi)
+
+    new_i = c * old_i - s * e * old_j
+    new_j = s * e.conjugate() * old_i + c * old_j
+
+    if new_i != 0 and i not in state:
+        births.append((step, j, i, i, j, theta, phi))
+    if new_j != 0 and j not in state:
+        births.append((step, i, j, i, j, theta, phi))
+
+    if abs(new_i) < eps:
+        state.pop(i, None)
+    else:
+        state[i] = new_i
+    if abs(new_j) < eps:
+        state.pop(j, None)
+    else:
+        state[j] = new_j
+```
+
+Each birth record stores the parent index, child index, gate indices `i,j`, and the rotation parameters `θ, φ`. The birth tree is built incrementally during the forward pass.
+
+## 3.4 Reconstructing amplitudes from the birth tree
+A birth record determines the unique parent that created a new amplitude. If the child amplitude after the rotation is known, the parent amplitude before the rotation can be reconstructed by inverting the Givens rotation.
+
+For a birth record with sine `s = \\sin θ` and phase `φ`, the inverse relation is:
+
+$$
+a_{\text{parent}}^{\text{before}} = \frac{1}{s} e^{-i φ} a_{\text{child}}^{\text{after}} \quad (s \neq 0).
+$$
+
+If $s = 0$, the rotation does not create a birth and no new child is introduced. Since each birth has a unique parent, the recorded edges form a directed forest, and the full structure of non-zero amplitudes can be recovered in $O(M)$ time when combined with the rotation parameters.
+
+> Note: this support bound applies to a sequence of Givens rotations taken as the original circuit. It does not imply that an arbitrary generic two-qubit gate can be decomposed into a polynomial number of global Givens rotations without losing the sparse structure.
+
 ## Expectation values
 For Pauli string `P` with mask `m` and phase `z`:
 ```
