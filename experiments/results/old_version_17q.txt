@@ -1,0 +1,7 @@
+n_qubits= 17
+M= 1000
+final_support= 1
+max_support= 1
+time_s= 0.030567
+peak_rss_mb= 19.785
+
