@@ -41,7 +41,22 @@ Pharmaceutical, biotech, and material science companies are welcome to:
 ```bash
 git clone https://github.com/Patcex-studio/givens-sparse-thesis.git
 cd givens-sparse-thesis
+python -m pip install -r requirements.txt
 python verify_givens.py   # runs the verification script
+```
+
+---
+## Experiments
+
+The repository now includes an `experiments/` folder with:
+
+- `h2_uccsd_verify.py` — a validation script for H₂ UCCSD support and energy
+- `experiments/run_random_uccsd_like.py` — a generator and sparse simulation for random UCCSD-like rotations
+
+Example:
+
+```bash
+python experiments/run_random_uccsd_like.py --n-qubits 148 --m 1000
 ```
 
 ---
